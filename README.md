@@ -23,6 +23,14 @@ Layout Fixer corrects text typed with the wrong keyboard layout. It supports Rus
 - Swap, paste, `.txt` import, result download, and conversion history.
 - Dark/light themes.
 - Local processing; no external libraries or network service required after download.
+  
+
+<p align="center">
+  <img src="assets/layout-fixer-preview.png"
+       alt="NetScope Application Preview"
+       width="100%">
+</p>
+
 
 ## Installation and usage
 
