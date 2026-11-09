@@ -1,5 +1,13 @@
 # Layout Fixer 4.0
 
+
+<p align="center">
+  <img src="assets/layout-fixer-banner.gif"
+       alt="NetScope Animated Banner"
+       width="100%">
+</p>
+
+
 **Author:** Khayom  
 **Version:** 4.0  
 **Updated:** 2026-11-09
