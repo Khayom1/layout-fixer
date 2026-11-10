@@ -95,7 +95,7 @@ Choose **1** for RU → EN, **2** for EN → RU, **3** for TJ → EN, **4** for 
 
 ## Run tests
 
-Python 3.9 or newer is recommended.
+Python 3.10 or newer is recommended.
 
 ~~~bash
 python -m unittest discover -s tests -v
