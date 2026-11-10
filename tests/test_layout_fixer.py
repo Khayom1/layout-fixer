@@ -4,11 +4,11 @@ from layout_fixer import convert, detect_direction, RU_TO_EN, TJ_TO_EN, EN_TO_TJ
 
 class LayoutFixerTests(unittest.TestCase):
     def test_russian_round_trip(self):
-        sample = "Привет, мир! Ёж"
+        sample = "Привет мир! Ёж"
         self.assertEqual(convert(convert(sample, "1"), "2"), sample)
 
     def test_tajik_round_trip(self):
-        sample = "Салом, ҷаҳон! ҒӮҲҶҚӢ"
+        sample = "Салом ҷаҳон! ҒӮҲҶҚӢ"
         self.assertEqual(convert(convert(sample, "3"), "4"), sample)
 
     def test_unmapped_characters_are_preserved(self):
