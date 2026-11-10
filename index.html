@@ -4,6 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#0b1020">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="assets/icon.svg" type="image/svg+xml">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="description" content="Layout Fixer 4.1 — offline Russian, English and Tajik keyboard layout correction.">
 <title>Layout Fixer 4.1</title>
 <style>
@@ -66,4 +70,5 @@ footer{text-align:center;color:var(--muted);font-size:11px;margin-top:25px;line-
 <footer class="site-footer"><div class="footer-brand">Layout Fixer <strong>4.1</strong></div><div data-i18n="footer">Created by Khayom · Offline keyboard layout correction</div><div class="footer-meta"><span data-i18n="versionInfo">Version 4.1 · Updated November 2026</span><span>·</span><a href="README.md" target="_blank" rel="noopener">README.md</a></div></footer>
 </div><div class="toast" id="toast" role="status" aria-live="polite"></div>
 <script src="app.js" defer></script>
+<script>if ("serviceWorker" in navigator && location.protocol !== "file:") { window.addEventListener("load", () => navigator.serviceWorker.register("./sw.js").catch(() => {})); }</script>
 </body></html>
