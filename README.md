@@ -38,7 +38,7 @@ Layout Fixer repairs text typed while the wrong keyboard layout was active. It i
 
 ### Russian
 
-Russian characters use standard Windows keyboard key positions. Unmapped characters, spaces, punctuation and emoji are preserved.
+Russian characters use standard Windows keyboard key positions. Characters outside the mapping are preserved. Punctuation keys that share a physical position with letters follow the same key-position mapping.
 
 ### Tajik
 
