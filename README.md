@@ -2,16 +2,16 @@
   <img src="assets/layout-fixer-hero.svg" alt="Layout Fixer — animated keyboard-layout correction" width="100%">
 </p>
 
-<h1 align="center">LAYOUT FIXER 4.1</h1>
+<h1 align="center">LAYOUT FIXER 4.2</h1>
 <p align="center"><strong>From mistyped characters to readable text — locally, privately, instantly.</strong></p>
 <p align="center">
-  <img alt="Version" src="https://img.shields.io/badge/version-4.1-78a9ff">
+  <img alt="Version" src="https://img.shields.io/badge/version-4.2-78a9ff">
   <img alt="Offline" src="https://img.shields.io/badge/works-offline-20b486">
   <img alt="Languages" src="https://img.shields.io/badge/languages-RU%20%7C%20EN%20%7C%20TJ-8068e8">
 </p>
 
 **Author:** Khayom Abdurahmonov  
-**Release:** 4.1 · **Updated:** 10 November 2026  
+**Release:** 4.2 · **Updated:** 10 November 2026  
 **Type:** Lightweight, browser-based keyboard-layout correction tool
 
 Layout Fixer repairs text typed while the wrong keyboard layout was active. It is **not a translator**: it maps characters by keyboard positions. The web application runs locally in your browser and does not send text to a server.
@@ -32,7 +32,8 @@ Layout Fixer repairs text typed while the wrong keyboard layout was active. It i
 - **Local history:** up to 20 recent conversions stored in browser storage.
 - **Dark and light themes.**
 - **Responsive interface:** designed for phones, tablets and desktop browsers.
-- **Offline operation:** after the project files have loaded, conversion needs no network connection.
+- **Installable PWA:** add it to your home screen on supported browsers.
+- **Offline operation:** the service worker caches the app shell for repeat visits without a connection.
 
 ## Keyboard mapping
 
@@ -54,6 +55,10 @@ The Tajik alphabet includes letters that are not present in the standard Russian
 | ҷ | **~j** | Ҷ | **~J** |
 
 These are **Layout Fixer reversible codes**, not a claim that every physical Tajik keyboard uses these exact key positions. The tilde convention prevents collisions in the mapping.
+
+## Install as an app
+
+Open the hosted site over HTTPS in a supported browser and choose **Install app** or **Add to Home Screen** from the browser menu. The service worker caches the application shell after the first successful visit, so the core tool can reopen offline. The first visit still requires an internet connection. Browser support and installation prompts vary by device.
 
 ## Run the web app
 
@@ -109,10 +114,13 @@ The test suite checks Russian round trips, Tajik round trips, preservation of un
 layout-fixer/
 ├── index.html                  # Responsive application shell and styles
 ├── app.js                      # Browser conversion engine and interface logic
+├── manifest.webmanifest        # Installable app metadata
+├── sw.js                       # Offline app-shell cache
 ├── layout_fixer.py             # Python command-line engine
 ├── tests/
 │   └── test_layout_fixer.py    # Python unit tests
 └── assets/
+    ├── icon.svg                # App icon
     ├── layout-fixer-hero.svg   # Animated SVG repository banner
     ├── layout-fixer-banner.gif # Previous visual banner
     └── layout-fixer-preview.png
@@ -127,7 +135,7 @@ layout-fixer/
 
 ## Version history
 
-### 4.1 — 10 November 2026
+### 4.2 — 10 November 2026
 - Rebuilt the browser conversion logic as a separate **app.js** module.
 - Corrected Tajik reverse conversion using unambiguous, reversible escape codes.
 - Corrected AUTO behavior: detects Cyrillic source scripts and no longer guesses the target for Latin input.
