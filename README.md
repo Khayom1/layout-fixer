@@ -1,233 +1,275 @@
-<p align="center">
-  <img src="assets/layout-fixer-hero.svg" alt="Layout Fixer — animated keyboard-layout correction" width="100%">
-</p>
+<div align="center">
 
-<h1 align="center">LAYOUT FIXER 4.2</h1>
-<p align="center"><strong>From mistyped characters to readable text — locally, privately, instantly.</strong></p>
-<p align="center">
-  <img alt="Version" src="https://img.shields.io/badge/version-4.2-78a9ff">
-  <img alt="Offline" src="https://img.shields.io/badge/works-offline-20b486">
-  <img alt="Languages" src="https://img.shields.io/badge/languages-RU%20%7C%20EN%20%7C%20TJ-8068e8">
-</p>
+<img src="assets/layout-fixer-showcase.svg" alt="Animated Layout Fixer showcase: keyboard layout recovery engine" width="100%">
 
-**Author:** Khayom Abdurahmonov  
-**Release:** 4.2 · **Updated:** 10 November 2026  
-**Type:** Lightweight, browser-based keyboard-layout correction tool
+# LAYOUT FIXER
 
-Layout Fixer repairs text typed while the wrong keyboard layout was active. It is **not a translator**: it maps characters by keyboard positions. The web application runs locally in your browser and does not send text to a server.
+### Wrong layout? Get your words back.
 
-## Preview
+**Private, offline-ready keyboard-layout correction for Russian, English and Tajik.**
 
-<p align="center">
-  <img src="assets/layout-fixer-preview.png" alt="Layout Fixer application preview" width="100%">
-</p>
+[![Version](https://img.shields.io/badge/version-4.2-8f86ff?style=for-the-badge)](#version-history)
+[![Offline](https://img.shields.io/badge/works-offline-20b486?style=for-the-badge)](#offline-and-privacy)
+[![Languages](https://img.shields.io/badge/languages-RU%20%7C%20EN%20%7C%20TJ-4f9bd8?style=for-the-badge)](#interface-languages)
+[![Python](https://img.shields.io/badge/Python-CLI-3776ab?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
+
+[Try it locally](#run-the-web-app) · [Features](#features) · [Keyboard mapping](#keyboard-mapping) · [Tests](#tests)
+
+</div>
+
+---
+
+## What it does
+
+You meant to type `hello`, but your keyboard was set to Russian — and the screen shows `руддщ`.
+
+Layout Fixer restores the intended text by mapping **physical keyboard positions**, not by translating words. Conversion happens locally in your browser or through the Python CLI. Your input is not sent to a remote API.
+
+## At a glance
+
+| Capability | Details |
+|---|---|
+| Four conversion directions | RU → EN, EN → RU, TJ → EN, EN → TJ |
+| AUTO mode | Detects Russian or Tajik Cyrillic; never guesses the target for Latin input |
+| Tajik-specific letters | Reversible escape codes for ғ, ӣ, қ, ӯ, ҳ and ҷ |
+| Interface languages | English, Russian and Tajik |
+| Editing | Paste, clear, swap, import TXT, copy and download |
+| Local history | Up to 20 recent conversions in browser storage |
+| Themes | Dark and light |
+| PWA | Installable app shell with service-worker caching |
+| Python CLI | Same four conversion directions from the terminal |
+
+## How conversion works
+
+1. **Read the characters** — inspect the text without uploading it.
+2. **Choose a direction** — select one of four mappings or AUTO for Cyrillic input.
+3. **Map key positions** — replace each recognized character with the character at the corresponding keyboard position.
+4. **Preserve what is unknown** — characters outside the selected mapping remain unchanged.
+5. **Review and reuse** — copy, download or swap the result.
+
+AUTO is intentionally conservative: it can identify Russian/Tajik Cyrillic input, but Latin text is ambiguous. Choose EN → RU or EN → TJ explicitly.
 
 ## Features
 
-- **Four explicit directions:** RU → EN, EN → RU, TJ → EN and EN → TJ.
-- **AUTO detection for Cyrillic:** identifies Russian or Tajik Cyrillic input.
-- **Honest Latin handling:** AUTO does not guess whether Latin text should become Russian or Tajik; choose the target direction.
-- **Three interface languages:** English, Русский and Тоҷикӣ.
-- **Editing tools:** paste, clear, swap direction, import TXT, copy and download results.
-- **Local history:** up to 20 recent conversions stored in browser storage.
-- **Dark and light themes.**
-- **Responsive interface:** designed for phones, tablets and desktop browsers.
-- **Installable PWA:** add it to your home screen on supported browsers.
-- **Offline operation:** the service worker caches the app shell for repeat visits without a connection.
+- **Browser editor:** two-pane input and result workspace.
+- **Four explicit mappings:** predictable source-to-target conversion.
+- **Tajik support:** dedicated reversible codes for letters not represented by the standard Russian mapping.
+- **AUTO detection:** Cyrillic source detection with no unsupported Latin guessing.
+- **Three interface languages:** English, Русский, Тоҷикӣ.
+- **Text utilities:** paste, clear, swap, import `.txt`, copy and download.
+- **History:** up to 20 recent conversions, stored locally in the current browser.
+- **Themes:** dark and light appearance.
+- **Responsive layout:** adapts to mobile, tablet and desktop screens.
+- **Installable PWA:** manifest and service worker for repeat visits and offline app-shell use.
+- **Python CLI:** local terminal conversion without a browser.
 
 ## Keyboard mapping
 
-### Russian
+Russian letters follow standard Windows keyboard key positions. Characters not included in the mapping are preserved.
 
-Russian characters use standard Windows keyboard key positions. Characters outside the mapping are preserved. Punctuation keys that share a physical position with letters follow the same key-position mapping.
-
-### Tajik
-
-The Tajik alphabet includes letters that are not present in the standard Russian layout. To avoid collisions and make conversion reversible, the six additional Tajik letters use explicit tilde escape codes:
+### Tajik-specific reversible codes
 
 | Tajik | Code | Tajik | Code |
 |---|---|---|---|
-| ғ | **~g** | Ғ | **~G** |
-| ӣ | **~i** | Ӣ | **~I** |
-| қ | **~q** | Қ | **~Q** |
-| ӯ | **~u** | Ӯ | **~U** |
-| ҳ | **~h** | Ҳ | **~H** |
-| ҷ | **~j** | Ҷ | **~J** |
+| ғ | `~g` | Ғ | `~G` |
+| ӣ | `~i` | Ӣ | `~I` |
+| қ | `~q` | Қ | `~Q` |
+| ӯ | `~u` | Ӯ | `~U` |
+| ҳ | `~h` | Ҳ | `~H` |
+| ҷ | `~j` | Ҷ | `~J` |
 
-These are **Layout Fixer reversible codes**, not a claim that every physical Tajik keyboard uses these exact key positions. The tilde convention prevents collisions in the mapping.
-
-## Install as an app
-
-Open the hosted site over HTTPS in a supported browser and choose **Install app** or **Add to Home Screen** from the browser menu. The service worker caches the application shell after the first successful visit, so the core tool can reopen offline. The first visit still requires an internet connection. Browser support and installation prompts vary by device.
+These escape sequences are Layout Fixer's reversible convention. They are not a claim that all physical Tajik keyboards use the same key positions.
 
 ## Run the web app
 
-### Option A — open locally
+### Android — Termux
 
-1. Download or clone this repository.
-2. Keep **index.html** and **app.js** in the same directory.
-3. Open **index.html** in a modern browser.
-
-### Option B — Android with Termux
-
-~~~bash
+```bash
 pkg update
 pkg install git python
 git clone https://github.com/Khayom1/layout-fixer.git
 cd layout-fixer
 python -m http.server 8000 --bind 127.0.0.1
-~~~
+```
 
-Open **http://127.0.0.1:8000/** in your phone browser. Keep the Termux session running while using the local server.
+Open **http://127.0.0.1:8000/** in the phone browser. Keep the Termux session running.
 
-### Option C — desktop
+### Desktop
 
-~~~bash
+```bash
+git clone https://github.com/Khayom1/layout-fixer.git
+cd layout-fixer
 python -m http.server 8000
-~~~
+```
 
-Then visit **http://localhost:8000/**.
+Open **http://localhost:8000/**.
 
-## Run the Python CLI
+You can also open `index.html` directly in a modern browser. Service-worker installation and offline caching require a supported secure context such as HTTPS or localhost.
 
-The Python command-line engine supports the same four directions:
-
-~~~bash
-python layout_fixer.py
-~~~
-
-Choose **1** for RU → EN, **2** for EN → RU, **3** for TJ → EN, **4** for EN → TJ, or **A** for Cyrillic AUTO detection.
-
-## Run tests
+## Python command-line interface
 
 Python 3.10 or newer is recommended.
 
-~~~bash
-python -m unittest discover -s tests -v
-~~~
+```bash
+python layout_fixer.py
+```
 
-The test suite checks Russian round trips, Tajik round trips, preservation of unmapped characters, invalid directions and AUTO detection behavior.
+Choose:
+
+| Option | Direction |
+|---|---|
+| 1 | Russian → English |
+| 2 | English → Russian |
+| 3 | Tajik → English |
+| 4 | English → Tajik |
+| A | AUTO for Russian/Tajik Cyrillic |
+| 0 | Exit |
+
+AUTO does not infer a target layout for Latin or mixed-script input. Select a direction explicitly in those cases.
+
+## Offline and privacy
+
+- Browser conversion runs in the browser; CLI conversion runs locally in Python.
+- The project does not upload entered text to a server or call a conversion API.
+- Recent conversions are stored in the browser's local storage on that device.
+- Imported TXT files are read locally; files larger than 2 MB are rejected.
+- The service worker caches the app shell after a successful load, enabling repeat visits offline in supported browsers.
+- The first visit still needs the files to be available locally or downloaded over a connection.
+
+**Privacy boundary:** browser extensions, device backups and other software on the device are outside this project's control. Clear local history if you do not want it retained in that browser.
+
+## Tests
+
+```bash
+python -m unittest discover -s tests -v
+```
+
+The test suite covers Russian and Tajik round trips, preservation of unmapped characters, invalid directions and AUTO detection behavior.
+
+Manual browser testing is also recommended for clipboard permissions, file import, PWA installation and offline cache behavior.
 
 ## Project structure
 
-~~~text
+```text
 layout-fixer/
-├── index.html                  # Responsive application shell and styles
-├── app.js                      # Browser conversion engine and interface logic
-├── manifest.webmanifest        # Installable app metadata
-├── sw.js                       # Offline app-shell cache
-├── layout_fixer.py             # Python command-line engine
+├── index.html                       # Responsive browser application
+├── app.js                           # Browser conversion engine and UI
+├── layout_fixer.py                  # Python CLI conversion engine
+├── manifest.webmanifest             # PWA metadata
+├── sw.js                            # Offline app-shell cache
 ├── tests/
-│   └── test_layout_fixer.py    # Python unit tests
+│   └── test_layout_fixer.py         # Python unit tests
 └── assets/
-    ├── icon.svg                # App icon
-    ├── layout-fixer-hero.svg   # Animated SVG repository banner
-    ├── layout-fixer-banner.gif # Previous visual banner
-    └── layout-fixer-preview.png
-~~~
+    ├── icon.svg                     # Application icon
+    ├── layout-fixer-hero.svg        # Compact animated hero
+    ├── layout-fixer-showcase.svg    # Full product showcase
+    └── layout-fixer-preview.png     # Application screenshot
+```
 
-## Privacy
+## Interface languages
 
-- Conversion is performed in the browser or locally by the Python script.
-- Text is not uploaded to an API by this project.
-- Browser history is stored in local storage on the device.
-- Imported text files are read locally; files larger than 2 MB are rejected by the web app.
+The interface is available in **English**, **Russian** and **Tajik**. Choose the language selector in the top-right corner of the app.
 
 ## Version history
 
 ### 4.2 — 10 November 2026
-- Rebuilt the browser conversion logic as a separate **app.js** module.
-- Corrected Tajik reverse conversion using unambiguous, reversible escape codes.
-- Corrected AUTO behavior: detects Cyrillic source scripts and no longer guesses the target for Latin input.
-- Fixed direction labels, swap behavior, local history handling and file-size validation.
-- Rebuilt the Python CLI for all four directions.
-- Added automated Python unit tests.
-- Added an animated SVG hero banner and rewrote this README.
+
+- Rebuilt browser conversion logic as a separate `app.js` module.
+- Corrected Tajik reverse conversion with reversible escape codes.
+- Made AUTO detection conservative for Latin and mixed-script input.
+- Fixed direction labels, swap behavior, local history and file-size validation.
+- Rebuilt the Python CLI and added automated unit tests.
+- Added animated SVG repository artwork and expanded project documentation.
 
 ### 4.0 — 9 November 2026
+
 - Added AUTO mode, three interface languages and browser history.
 - Added import, download, copy, paste, swap and theme controls.
 
 ### 3.0 — 9 November 2026
+
 - Added Tajik keyboard mapping and multilingual interface.
 
 ## Roadmap
 
 - Browser-based automated tests.
-- More configurable keyboard profiles.
-- Improved mixed-script detection without guessing conversion targets.
+- Configurable keyboard profiles.
+- Improved mixed-script detection without guessing the target layout.
+
+Roadmap items are planned improvements, not features currently claimed as implemented.
 
 ## License
 
-No license file is currently included. Add a LICENSE file with the full MIT license text before distributing the project under the MIT license.
+No license file is currently included. The repository is therefore not yet explicitly licensed for reuse or redistribution. Add a license file after choosing the terms you want to publish under.
+
+<div align="center">
+
+**Built by [Khayom Abdurahmonov](https://github.com/Khayom1)**
+
+[Repository](https://github.com/Khayom1/layout-fixer) · [Issues](https://github.com/Khayom1/layout-fixer/issues)
+
+*Fix the layout. Keep your words.*
+
+</div>
 
 ---
 
 ## Тоҷикӣ
 
-**Layout Fixer** матнеро ислоҳ мекунад, ки бо раскладкаи нодурусти клавиатура чоп шудааст. Ин тарҷумон нест: ҳарфҳоро мувофиқи ҷойи тугмаҳо табдил медиҳад. Коркард дар худи браузер ё компютер анҷом мешавад.
+**Layout Fixer** матнеро барқарор мекунад, ки ҳангоми фаъол будани раскладкаи нодуруст чоп шудааст. Ин тарҷумон нест: ҳарфҳо аз рӯи ҷойи тугмаҳои клавиатура иваз мешаванд. Коркард дар браузер ё Python-и худи дастгоҳ анҷом меёбад.
 
-### Имкониятҳо
-- Чор самт: RU → EN, EN → RU, TJ → EN ва EN → TJ.
-- Муайянкунии худкори матни кириллии русӣ ва тоҷикӣ.
-- Барои матни лотинӣ реҷаи AUTO самти мақсадро тахмин намекунад; самтро дастӣ интихоб кунед.
+- Чор самт: RU → EN, EN → RU, TJ → EN, EN → TJ.
+- AUTO матни кириллиро муайян мекунад, аммо барои матни лотинӣ самтро тахмин намекунад.
+- Шаш ҳарфи махсуси тоҷикӣ бо рамзҳои баргардондашавандаи `~g ~i ~q ~u ~h ~j` дастгирӣ мешаванд.
 - Интерфейс бо тоҷикӣ, русӣ ва англисӣ.
-- Гузоштан, пок кардан, иваз кардани самт, воридоти TXT, нусхабардорӣ ва боргирӣ.
-- Таърихи маҳаллӣ, реҷаи равшан ва торик.
-- Пас аз бор шудани файлҳо бе интернет кор мекунад.
+- Нусхабардорӣ, гузоштан, иваз кардани самт, воридоти TXT, боргирӣ ва таърихи маҳаллӣ.
+- Пас аз бор шудани файлҳо дар браузерҳои мувофиқ бе интернет кор мекунад.
 
-### Рамзҳои ҳарфҳои махсуси тоҷикӣ
+### Насб дар Termux
 
-Барои он ки табдил баргардондашаванда бошад ва ҳарфҳо ба якдигар бархӯрд накунанд, шаш ҳарфи махсус чунин рамз доранд: **ғ = ~g**, **ӣ = ~i**, **қ = ~q**, **ӯ = ~u**, **ҳ = ~h**, **ҷ = ~j**. Ҳарфҳои калон бо **~G**, **~I**, **~Q**, **~U**, **~H**, **~J** ифода мешаванд. Ин рамзҳои дохилии Layout Fixer мебошанд, на стандарти умумии клавиатура.
-
-### Насб дар Android (Termux)
-
-~~~bash
+```bash
 pkg update
 pkg install git python
 git clone https://github.com/Khayom1/layout-fixer.git
 cd layout-fixer
 python -m http.server 8000 --bind 127.0.0.1
-~~~
+```
 
 Дар браузер **http://127.0.0.1:8000/**-ро кушоед.
 
 ### Санҷишҳо
 
-~~~bash
+```bash
 python -m unittest discover -s tests -v
-~~~
+```
 
 ---
 
 ## Русский
 
-**Layout Fixer** восстанавливает текст, набранный при неверно выбранной раскладке клавиатуры. Это не переводчик: символы заменяются по позициям клавиш. Обработка выполняется локально в браузере или Python CLI.
+**Layout Fixer** восстанавливает текст, набранный при неверно выбранной раскладке. Это не переводчик: символы заменяются по позициям клавиш. Обработка выполняется локально в браузере или Python CLI.
 
-### Возможности
-- Четыре направления: RU → EN, EN → RU, TJ → EN и EN → TJ.
-- AUTO распознаёт русскую и таджикскую кириллицу.
-- Для латинского текста AUTO не угадывает целевую раскладку — выберите EN → RU или EN → TJ.
+- Четыре направления: RU → EN, EN → RU, TJ → EN, EN → TJ.
+- AUTO распознаёт русскую и таджикскую кириллицу, но не угадывает целевую раскладку для латиницы.
+- Шесть специальных таджикских букв используют обратимые коды `~g ~i ~q ~u ~h ~j`.
 - Интерфейс на английском, русском и таджикском.
-- Вставка, очистка, обмен направления, импорт TXT, копирование и скачивание.
-- Локальная история, светлая и тёмная темы.
-- Работа без сети после загрузки файлов.
+- Импорт TXT, копирование, вставка, обмен направления, скачивание и локальная история.
+- Офлайн-режим после загрузки приложения в поддерживаемом браузере.
 
-### Установка
+### Установка в Termux
 
-~~~bash
+```bash
 pkg update
 pkg install git python
 git clone https://github.com/Khayom1/layout-fixer.git
 cd layout-fixer
 python -m http.server 8000 --bind 127.0.0.1
-~~~
+```
 
-Откройте **http://127.0.0.1:8000/** в браузере.
+Откройте **http://127.0.0.1:8000/**.
 
 ### Тесты
 
-~~~bash
+```bash
 python -m unittest discover -s tests -v
-~~~
-
+```
